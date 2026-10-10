@@ -1,0 +1,63 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  max-width: 480px;
+  margin: 48px auto;
+  padding: 0 16px;
+}
+
+form {
+  display: flex;
+  gap: 8px;
+}
+
+form input {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 16px;
+}
+
+button {
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+label.done {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.error {
+  color: #c0392b;
+}
+
+.empty {
+  opacity: 0.6;
+}
