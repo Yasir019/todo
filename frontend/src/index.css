@@ -1,63 +1,217 @@
 :root {
   color-scheme: light dark;
   font-family: system-ui, sans-serif;
+
+  --card: #ffffff;
+  --text: #1f2340;
+  --muted: #6b7090;
+  --field: #f3f2ff;
+  --field-border: #dcd9ff;
+  --item: #faf9ff;
+  --track: #e8e6fb;
+  --shadow: 0 24px 60px rgba(49, 28, 122, 0.35);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --card: #1c1b33;
+    --text: #f1f0ff;
+    --muted: #a3a2c7;
+    --field: #27264a;
+    --field-border: #3b3970;
+    --item: #232246;
+    --track: #2f2e58;
+    --shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  }
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  min-height: 100vh;
+  padding: 48px 16px;
+  color: var(--text);
+  background: linear-gradient(135deg, #4f46e5 0%, #a855f7 50%, #ec4899 100%) fixed;
 }
 
 main {
-  max-width: 480px;
-  margin: 48px auto;
-  padding: 0 16px;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 32px 28px;
+  background: var(--card);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+h1 {
+  margin: 0;
+  font-size: 34px;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #6366f1, #d946ef, #f97316);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.summary {
+  margin: 6px 0 14px;
+  color: var(--muted);
+}
+
+.progress {
+  height: 8px;
+  margin-bottom: 24px;
+  overflow: hidden;
+  background: var(--track);
+  border-radius: 999px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #14b8a6);
+  border-radius: 999px;
+  transition: width 0.3s ease;
 }
 
 form {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
 
 form input {
   flex: 1;
-  padding: 8px 10px;
+  min-width: 0;
+  padding: 12px 14px;
   font-size: 16px;
+  color: var(--text);
+  background: var(--field);
+  border: 2px solid var(--field-border);
+  border-radius: 14px;
+  outline: none;
+  transition: border-color 0.15s ease;
 }
 
-button {
-  padding: 8px 12px;
+form input:focus {
+  border-color: #8b5cf6;
+}
+
+form button {
+  padding: 12px 20px;
   font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
   cursor: pointer;
+  background: linear-gradient(135deg, #6366f1, #d946ef);
+  border: none;
+  border-radius: 14px;
+  transition: transform 0.1s ease, filter 0.15s ease;
+}
+
+form button:hover {
+  filter: brightness(1.1);
+}
+
+form button:active {
+  transform: scale(0.97);
+}
+
+button:focus-visible,
+input[type='checkbox']:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 2px;
 }
 
 ul {
-  list-style: none;
+  display: grid;
+  gap: 10px;
+  margin: 24px 0 0;
   padding: 0;
+  list-style: none;
 }
 
 li {
+  --accent: #6366f1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--item);
+  border-left: 5px solid var(--accent);
+  border-radius: 14px;
+}
+
+li:nth-child(5n + 2) {
+  --accent: #ec4899;
+}
+
+li:nth-child(5n + 3) {
+  --accent: #f97316;
+}
+
+li:nth-child(5n + 4) {
+  --accent: #14b8a6;
+}
+
+li:nth-child(5n + 5) {
+  --accent: #eab308;
 }
 
 label {
   display: flex;
+  flex: 1;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+input[type='checkbox'] {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--accent);
 }
 
 label.done {
+  color: var(--muted);
   text-decoration: line-through;
-  opacity: 0.6;
+}
+
+.delete {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.delete:hover {
+  color: #ffffff;
+  background: #ef4444;
 }
 
 .error {
-  color: #c0392b;
+  margin: 16px 0 0;
+  padding: 10px 14px;
+  color: #b91c1c;
+  background: #fee2e2;
+  border-radius: 12px;
 }
 
 .empty {
-  opacity: 0.6;
+  margin: 24px 0 0;
+  color: var(--muted);
+  text-align: center;
 }

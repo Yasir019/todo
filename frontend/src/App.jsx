@@ -62,9 +62,29 @@ export default function App() {
     }
   }
 
+  const doneCount = todos.filter((todo) => todo.done).length;
+  const progress = todos.length ? Math.round((doneCount / todos.length) * 100) : 0;
+
   return (
     <main>
-      <h1>Todo</h1>
+      <header>
+        <h1>My Todos</h1>
+        <p className="summary">
+          {todos.length === 0
+            ? 'Add your first task below'
+            : `${doneCount} of ${todos.length} done`}
+        </p>
+        <div
+          className="progress"
+          role="progressbar"
+          aria-label="Completed todos"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={progress}
+        >
+          <div className="progress-fill" style={{ width: `${progress}%` }} />
+        </div>
+      </header>
 
       <form onSubmit={addTodo}>
         <input
@@ -89,7 +109,11 @@ export default function App() {
               />
               {todo.title}
             </label>
-            <button onClick={() => deleteTodo(todo)} aria-label={`Delete ${todo.title}`}>
+            <button
+              className="delete"
+              onClick={() => deleteTodo(todo)}
+              aria-label={`Delete ${todo.title}`}
+            >
               ×
             </button>
           </li>
